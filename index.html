@@ -1254,6 +1254,58 @@
   .lp-analysis .lp-date{display:inline-block;margin-bottom:18px;padding:6px 15px;border:1px solid rgba(201,168,106,.5);border-radius:999px;background:rgba(201,168,106,.09);font-size:12.5px;font-weight:700;color:var(--gold-hot);letter-spacing:.06em}
   .lp-analysis p{color:#DCE6EF;font-size:16.5px;line-height:1.95}
   @media(max-width:560px){.lp-analysis{padding:28px 22px}.lp-panel{padding:24px 18px 18px}.lp-table{font-size:14px}}
+  /* stocks panel (custom, replaces the TradingView widget) */
+  #stocksPanel > h3{flex-wrap:wrap}
+  .st-badge{display:inline-flex;align-items:center;gap:7px;margin-left:4px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--muted-2);white-space:nowrap}
+  .st-badge .dot{width:7px;height:7px;border-radius:50%;background:#71879C;flex:none}
+  .st-badge.open{color:#4ADE80;border-color:rgba(74,222,128,.4)}
+  .st-badge.open .dot{background:#4ADE80;animation:pulseDot 2s ease-in-out infinite}
+  .st-updated{margin-left:auto;font-size:12.5px;color:var(--muted-2);font-weight:600;white-space:nowrap}
+  .st-chart-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-top:20px;flex-wrap:wrap}
+  .st-sym-name{font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-size:20px;font-weight:700;color:#fff}
+  .st-sym-price{font-size:24px;font-weight:700;color:var(--gold-hot);font-variant-numeric:tabular-nums;margin-top:4px}
+  .st-sym-price .chg{font-size:15px;margin-left:10px}
+  .st-ranges{display:flex;gap:6px;flex-wrap:wrap}
+  .st-ranges button{font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.04em;color:var(--muted-2);background:rgba(5,20,31,.55);border:1px solid var(--line);border-radius:999px;padding:7px 13px;cursor:pointer;transition:all .25s ease}
+  .st-ranges button:hover{color:#fff;border-color:rgba(201,168,106,.55)}
+  .st-ranges button.on{color:#081F31;background:var(--gold);border-color:var(--gold)}
+  .st-chart-wrap{position:relative;margin-top:16px}
+  .st-chart-wrap svg{display:block;width:100%;height:220px}
+  #stEndDot{animation:endDotPulse 2.2s ease-in-out infinite}
+  @keyframes endDotPulse{0%,100%{opacity:1}50%{opacity:.45}}
+  .st-chart-empty{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted-2);font-size:14px}
+  .st-xlabels{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted-2);margin-top:6px;font-variant-numeric:tabular-nums}
+  .st-table tbody tr{cursor:pointer;transition:background .25s ease}
+  .st-table tbody tr:hover{background:rgba(201,168,106,.07)}
+  .st-table tbody tr.on{background:rgba(201,168,106,.12);box-shadow:inset 3px 0 0 var(--gold)}
+  .st-table tbody tr.on td.asset{color:var(--gold-hot)}
+  /* fear & greed gauge */
+  .fg-wrap{margin-top:20px;padding-top:18px;border-top:1px solid var(--line-soft);display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .fg-gauge{position:relative;width:150px;flex:none}
+  .fg-gauge svg{display:block;width:100%;height:auto}
+  .fg-read{flex:1;min-width:140px}
+  .fg-value{font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-size:30px;font-weight:700;color:#fff;line-height:1}
+  .fg-value small{font-size:14px;color:var(--muted-2);font-weight:600}
+  .fg-label{font-size:14.5px;font-weight:700;margin-top:6px}
+  .fg-yday{font-size:12.5px;color:var(--muted-2);margin-top:6px}
+  /* economic calendar */
+  .ev-list{margin-top:8px}
+  .ev-day{margin-top:18px}
+  .ev-day:first-child{margin-top:6px}
+  .ev-day h4{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hot);margin-bottom:8px}
+  .ev-item{display:flex;align-items:baseline;gap:11px;padding:9px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px;color:#DCE6EF}
+  .ev-item:last-child{border-bottom:none}
+  .ev-dot{width:8px;height:8px;border-radius:50%;flex:none;transform:translateY(-1px)}
+  .ev-dot.high{background:var(--gold);box-shadow:0 0 10px rgba(201,168,106,.7)}
+  .ev-dot.medium{background:#71879C}
+  .ev-item .ev-place{margin-left:auto;font-size:12px;color:var(--muted-2);white-space:nowrap}
+  /* syria history charts */
+  .hist-charts{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px}
+  .hist-title{font-size:13px;font-weight:700;color:#fff}
+  .hist-title span{color:var(--muted-2);font-weight:600;font-size:12px;margin-left:6px}
+  .hist-chart svg{display:block;width:100%;height:110px;margin-top:10px}
+  .hist-range{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted-2);margin-top:4px;font-variant-numeric:tabular-nums}
+  @media(max-width:640px){.hist-charts{grid-template-columns:1fr}.st-chart-wrap svg{height:180px}.fg-wrap{justify-content:center;text-align:center}}
 
   /* syria heading pin: fixed stage beside the title (never wraps onto its own
      line), gold ripple rings radiating from the pin's base point, and a very
@@ -2974,6 +3026,20 @@
               <tr><td class="asset">XRP <span>XRP</span></td><td class="num" id="cp-ripple">—</td><td class="r chg" id="cc-ripple">—</td></tr>
             </tbody>
           </table>
+          <div class="fg-wrap">
+            <div class="fg-gauge">
+              <svg viewBox="0 0 150 80" role="img" aria-label="Crypto Fear and Greed Index gauge">
+                <path d="M15 70 A60 60 0 0 1 135 70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="12" stroke-linecap="round"/>
+                <path id="fgArc" d="M15 70 A60 60 0 0 1 135 70" fill="none" stroke="#F0766A" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 200"/>
+                <g id="fgNeedle"><line x1="75" y1="70" x2="75" y2="22" stroke="#F7E7BC" stroke-width="2.5" stroke-linecap="round"/><circle cx="75" cy="70" r="5" fill="#F7E7BC"/></g>
+              </svg>
+            </div>
+            <div class="fg-read">
+              <div class="fg-value"><span id="fgValue">—</span> <small>/ 100</small></div>
+              <div class="fg-label" id="fgLabel">Crypto Fear &amp; Greed</div>
+              <div class="fg-yday" id="fgYday">Yesterday: —</div>
+            </div>
+          </div>
           <p class="lp-err" id="cryptoErr">Data unavailable, retrying…</p>
           <p class="lp-note-sm">Live — refreshes every minute.</p>
           <p class="lp-note-sm">Source: CoinGecko</p>
@@ -3034,16 +3100,63 @@
         <h2 class="sec-title" style="margin-top:14px">Stocks <em>&amp; indices</em> <svg class="lp-mini" viewBox="0 0 64 44" aria-hidden="true" focusable="false"><path d="M5 40 H59" stroke="#71879C" stroke-width="2"/><rect class="bar" x="9" y="28" width="8" height="12" fill="#C9A86A"/><rect class="bar d1" x="22" y="21" width="8" height="19" fill="#F2DFA8"/><rect class="bar d2" x="35" y="14" width="8" height="26" fill="#C9A86A"/><rect class="bar d3" x="48" y="7" width="8" height="33" fill="#FCFBFB" opacity=".85"/><polyline points="13,24 26,17 39,10 52,3" fill="none" stroke="#F7E7BC" stroke-width="2.6" stroke-linecap="round" pathLength="100" class="draw-line"/></svg></h2>
         <p class="sec-sub">The major US indices and the biggest technology names.</p>
       </div>
-      <div class="tv-box rv" style="min-height:500px">
-        <div class="tv-hint">Loading live market data…<br>If the chart does not appear, the data feed is temporarily unavailable.</div>
-        <div class="tradingview-widget-container" id="tvStocks"></div>
+      <div class="lp-panel rv" id="stocksPanel">
+        <h3><span class="live-dot"></span> Stocks &amp; Indices <span class="st-badge" id="stMarketBadge"><span class="dot"></span> NYSE · …</span><span class="st-updated" id="stUpdated"></span></h3>
+        <div class="st-chart-head">
+          <div>
+            <div class="st-sym-name" id="stChartName">S&amp;P 500</div>
+            <div class="st-sym-price"><span id="stChartPrice">—</span> <span class="chg" id="stChartChange"></span></div>
+          </div>
+          <div class="st-ranges" id="stRanges">
+            <button type="button" data-range="1D" class="on">1D</button><button type="button" data-range="1M">1M</button><button type="button" data-range="3M">3M</button><button type="button" data-range="1Y">1Y</button><button type="button" data-range="5Y">5Y</button><button type="button" data-range="ALL">All</button>
+          </div>
+        </div>
+        <div class="st-chart-wrap">
+          <svg id="stChart" viewBox="0 0 640 220" preserveAspectRatio="none" role="img" aria-label="Price chart">
+            <defs>
+              <linearGradient id="stFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#C9A86A" stop-opacity=".28"/>
+                <stop offset="100%" stop-color="#C9A86A" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g id="stGrid"></g>
+            <path id="stArea" fill="url(#stFill)"/>
+            <path id="stLine" fill="none" stroke="#F7E7BC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle id="stEndDot" r="4.5" fill="#F7E7BC" style="display:none"/>
+          </svg>
+          <div class="st-chart-empty" id="stChartEmpty">Loading chart…</div>
+          <div class="st-xlabels" id="stXLabels"><span></span><span></span><span></span></div>
+        </div>
+        <table class="lp-table st-table">
+          <thead><tr><th>Index / Stock</th><th class="r">Price (USD)</th><th class="r">Today</th></tr></thead>
+          <tbody id="stRows"></tbody>
+        </table>
+        <p class="lp-err" id="stocksErr">Data unavailable, retrying…</p>
+        <p class="lp-note-sm">Live — refreshes every minute. Stock data is delayed about 15 minutes.</p>
+        <p class="lp-note-sm">Source: Yahoo Finance</p>
       </div>
-      <p class="lp-note-sm rv" style="margin-top:16px">Stock data is delayed about 15 minutes.</p>
-      <p class="lp-note-sm rv">Source: TradingView</p>
     </div>
   </section>
 
-  <section class="blk tint" style="padding-top:30px">
+  <section class="blk tint">
+    <div class="wrap">
+      <div class="rv">
+        <div class="kicker">Global Economy</div>
+        <h2 class="sec-title" style="margin-top:14px">The world, <em>in one paragraph</em> <svg class="lp-mini" viewBox="0 0 64 44" aria-hidden="true" focusable="false"><circle cx="32" cy="22" r="15" fill="none" stroke="#C9A86A" stroke-width="2"/><ellipse cx="32" cy="22" rx="15" ry="6" fill="none" stroke="#F7E7BC" stroke-width="1.6"/><ellipse cx="32" cy="22" rx="6" ry="15" fill="none" stroke="#F7E7BC" stroke-width="1.6"/><circle class="tw" cx="52" cy="8" r="2.5" fill="#F7E7BC"/><circle class="tw" style="animation-delay:.8s" cx="10" cy="12" r="2" fill="#C9A86A"/><circle class="ring-pulse" cx="32" cy="22" r="15" fill="none" stroke="#C9A86A" stroke-width="1.5"/></svg></h2>
+        <p class="sec-sub">A daily read on world markets — and the week's key events.</p>
+      </div>
+      <div class="lp-analysis rv" style="margin-top:30px">
+        <span class="lp-date" id="globalAnalysisDate">—</span>
+        <p id="globalAnalysisText">Loading today's global analysis…</p>
+      </div>
+      <div class="lp-panel rv" style="margin-top:22px">
+        <h3>Economic Calendar <svg class="lp-mini" viewBox="0 0 64 44" aria-hidden="true" focusable="false"><rect x="10" y="10" width="44" height="28" rx="4" fill="none" stroke="#C9A86A" stroke-width="2"/><path d="M10 18 H54" stroke="#C9A86A" stroke-width="2"/><path d="M20 6 v8 M44 6 v8" stroke="#F7E7BC" stroke-width="2.4" stroke-linecap="round"/><circle class="tw" cx="22" cy="28" r="3" fill="#F7E7BC"/><circle class="tw" style="animation-delay:.7s" cx="34" cy="28" r="3" fill="#C9A86A"/><circle class="tw" style="animation-delay:1.3s" cx="46" cy="28" r="3" fill="#F7E7BC"/></svg></h3>
+        <div class="ev-list" id="evList"><p class="lp-note-sm">Loading the week's events…</p></div>
+        <p class="lp-note-sm">Market-moving releases for the next seven days, refreshed daily.</p>
+      </div>
+    </div>
+  </section>
+  <section class="blk" style="padding-top:30px">
     <div class="wrap">
       <div class="rv">
         <div class="kicker">Syria — Daily Snapshot</div>
@@ -3119,6 +3232,22 @@
         <p class="lp-note-sm">Sources: Central Bank of Syria (Bulletin 213); parallel market via LiraScope</p>
       </div>
 
+      <div class="lp-panel rv" style="margin-top:22px">
+        <h3>30-Day Trend <svg class="lp-mini" viewBox="0 0 64 44" aria-hidden="true" focusable="false"><path d="M5 40 H59" stroke="#71879C" stroke-width="2"/><polyline points="8,32 20,26 32,29 44,18 56,10" fill="none" stroke="#F7E7BC" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" pathLength="100" class="draw-line"/><circle class="tw" cx="56" cy="10" r="3" fill="#F7E7BC"/></svg></h3>
+        <div class="hist-charts">
+          <div class="hist-chart">
+            <div class="hist-title">Gold 21k <span>per gram · SYP</span></div>
+            <svg id="histGold" viewBox="0 0 320 110" preserveAspectRatio="none" role="img" aria-label="Gold 21k price trend, last 30 days"><path id="histGoldArea" fill="rgba(201,168,106,.14)"/><path id="histGoldLine" fill="none" stroke="#F7E7BC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="hist-range"><span id="histGoldFirst">—</span><span id="histGoldLast">—</span></div>
+          </div>
+          <div class="hist-chart">
+            <div class="hist-title">US Dollar <span>parallel · SYP</span></div>
+            <svg id="histUsd" viewBox="0 0 320 110" preserveAspectRatio="none" role="img" aria-label="Parallel US dollar trend, last 30 days"><path id="histUsdArea" fill="rgba(201,168,106,.14)"/><path id="histUsdLine" fill="none" stroke="#F7E7BC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="hist-range"><span id="histUsdFirst">—</span><span id="histUsdLast">—</span></div>
+          </div>
+        </div>
+        <p class="lp-note-sm" id="histNote">A new point is added every morning.</p>
+      </div>
       <div class="rv" style="margin-top:40px">
         <div class="kicker">Daily Analysis</div>
         <h2 class="sec-title" style="margin-top:14px">Today's <em>read</em></h2>
@@ -3937,6 +4066,88 @@
   function syFmtInt(n){
     return Math.round(n).toLocaleString("en-US");
   }
+
+  var syData = null;
+  function escapeHtml(s){
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function fmtInt(n){
+    if (typeof n !== "number") return "\u2014";
+    return n.toLocaleString("en-US");
+  }
+  /* Global analysis + economic calendar + 30-day history charts all come
+     from the same Syria JSON feed. Re-runs on every visit to Live Pulse
+     (idempotent) so the mini charts replay their draw-in animation. */
+  function renderSyriaExtras(d){
+    if (!d) return;
+    if (typeof d.global_analysis === "string" && d.global_analysis) {
+      sySet("globalAnalysisText", d.global_analysis);
+      if (d.global_analysis_date) sySet("globalAnalysisDate", d.global_analysis_date);
+    }
+    if (Array.isArray(d.events)) renderEvents(d.events);
+    if (Array.isArray(d.history) && d.history.length > 1) renderHistory(d.history);
+  }
+  function renderEvents(events){
+    var list = document.getElementById("evList");
+    if (!list) return;
+    var byDay = {};
+    var order = [];
+    events.forEach(function(ev){
+      if (!ev || !ev.date) return;
+      if (!byDay[ev.date]) { byDay[ev.date] = []; order.push(ev.date); }
+      byDay[ev.date].push(ev);
+    });
+    order.sort();
+    if (!order.length) { list.innerHTML = '<p class="lp-note-sm">No events scheduled this week.</p>'; return; }
+    var html = "";
+    order.forEach(function(day){
+      var dt = new Date(day + "T12:00:00");
+      var label = dt.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+      html += '<div class="ev-day"><h4>' + escapeHtml(label) + '</h4>';
+      byDay[day].forEach(function(ev){
+        html += '<div class="ev-item"><span class="ev-dot ' + (ev.importance === "high" ? "high" : "medium") + '"></span><span>' + escapeHtml(ev.title) + '</span><span class="ev-place">' + escapeHtml(ev.place || "") + '</span></div>';
+      });
+      html += '</div>';
+    });
+    list.innerHTML = html;
+  }
+  function renderHistory(hist){
+    var gold = hist.map(function(h){ return h.gold21k_sell; });
+    var usd = hist.map(function(h){ return h.usd_parallel_sell; });
+    drawMiniChart("histGoldLine", "histGoldArea", gold);
+    drawMiniChart("histUsdLine", "histUsdArea", usd);
+    sySet("histGoldFirst", fmtInt(gold[0]) + " \u00b7 " + hist[0].date);
+    sySet("histGoldLast", fmtInt(gold[gold.length - 1]) + " \u00b7 " + hist[hist.length - 1].date);
+    sySet("histUsdFirst", fmtInt(usd[0]) + " \u00b7 " + hist[0].date);
+    sySet("histUsdLast", fmtInt(usd[usd.length - 1]) + " \u00b7 " + hist[hist.length - 1].date);
+    var note = document.getElementById("histNote");
+    if (note) note.textContent = hist.length >= 30 ? "Last 30 days \u2014 a new point is added every morning." : "Building up \u2014 " + hist.length + " days of history so far. A new point is added every morning.";
+  }
+  function drawMiniChart(lineId, areaId, vals){
+    var line = document.getElementById(lineId);
+    var area = document.getElementById(areaId);
+    if (!line || !area || !vals || vals.length < 2) return;
+    var W = 320, H = 110, P = 8;
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+    if (max === min) max = min + 1;
+    var pad = (max - min) * 0.12; min -= pad; max += pad;
+    var pts = vals.map(function(v, i){
+      return [(P + (W - 2 * P) * i / (vals.length - 1)).toFixed(1), (P + (H - 2 * P) * (1 - (v - min) / (max - min))).toFixed(1)];
+    });
+    var d = "M" + pts.map(function(p){ return p[0] + " " + p[1]; }).join(" L");
+    line.setAttribute("d", d);
+    area.setAttribute("d", d + " L" + (W - P) + " " + (H - P) + " L" + P + " " + (H - P) + " Z");
+    var len = 0;
+    try { len = line.getTotalLength(); } catch (e) { len = 0; }
+    if (len > 0) {
+      line.style.transition = "none";
+      line.style.strokeDasharray = len;
+      line.style.strokeDashoffset = len;
+      void line.getBoundingClientRect();
+      line.style.transition = "stroke-dashoffset 1s ease";
+      line.style.strokeDashoffset = "0";
+    }
+  }
   function loadSyria(){
     attemptSyria(0);
   }
@@ -3995,6 +4206,8 @@
         if (typeof d.analysis === "string" && d.analysis) {
           sySet("syriaAnalysisText", d.analysis);
         }
+        syData = d;
+        renderSyriaExtras(d);
       })
       .catch(function(){
         /* two retries (2s, then 6s — Apps Script cold starts can be slow);
@@ -4005,66 +4218,324 @@
   }
   if (document.getElementById("syriaUpdated")) loadSyria();
 
-  /* ---------- TradingView widgets: built lazily, the first time the
-       Live Pulse page is shown, so they measure a visible container.
-       If a widget fails to load, the .tv-hint fallback stays visible
-       and the layout keeps its shape. ---------- */
-  function buildTV(id, src, cfg, height){
-    var box = document.getElementById(id);
-    if (!box || box.getAttribute("data-built")) return;
-    box.setAttribute("data-built", "1");
-    box.style.height = height + "px";
-    var w = document.createElement("div");
-    w.className = "tradingview-widget-container__widget";
-    w.style.width = "100%";
-    w.style.height = "100%";
-    box.appendChild(w);
-    var s = document.createElement("script");
-    s.type = "text/javascript";
-    s.async = true;
-    s.src = src;
-    s.innerHTML = JSON.stringify(cfg);
-    box.appendChild(s);
+
+  /* ---------- Stocks: custom panel fed by Yahoo Finance through the
+       Apps Script web app (the same script that serves the Syria and
+       articles feeds). No TradingView widget anymore — the panel is
+       built in the site's own style, with an animated SVG chart,
+       range buttons and a NYSE market-status badge. ---------- */
+  var STOCKS = [
+    { key: "SPX", label: "S&P 500", sub: "US Index" },
+    { key: "NDX", label: "Nasdaq 100", sub: "US Index" },
+    { key: "DJI", label: "Dow Jones", sub: "US Index" },
+    { key: "AAPL", label: "Apple", sub: "NASDAQ" },
+    { key: "MSFT", label: "Microsoft", sub: "NASDAQ" },
+    { key: "NVDA", label: "Nvidia", sub: "NASDAQ" }
+  ];
+  var STOCKS_URL = "https://script.google.com/macros/s/AKfycbxzhxbpMLnCnGP7dVYSBXV42sPa-iOuYxnZFpFr6VSdfKBqJKo8cHuO_fJpIqKPVCqT/exec?feed=stocks";
+  var stSelected = "SPX", stRange = "1D", stQuotes = {}, stBuilt = false, stTimer = null;
+  function fmtStock(p){
+    if (typeof p !== "number") return "\u2014";
+    return p.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
-  var MO = "https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js";
-  /* Dark theme, done the way TradingView's own configurator emits it:
-     colorTheme "dark" AND isTransparent false (transparent mode lets the
-     widget fall back to its white card), plus the full dark colour set —
-     gold chart line and gold area fill in the site's #C9A86A, light scale
-     text, no grid lines, and a gold-tinted active-symbol highlight instead
-     of the default blue. Every key used here is in the Market Overview
-     widget's official property list. */
-  var MO_DARK = {
-    colorTheme: "dark", dateRange: "1D", showChart: true, locale: "en",
-    width: "100%", height: 500, isTransparent: false, largeChartUrl: "",
-    showSymbolLogo: true, showFloatingTooltip: true,
-    plotLineColorGrowing: "rgba(201, 168, 106, 1)",
-    plotLineColorFalling: "rgba(201, 168, 106, 1)",
-    belowLineFillColorGrowing: "rgba(201, 168, 106, 0.12)",
-    belowLineFillColorFalling: "rgba(201, 168, 106, 0.12)",
-    belowLineFillColorGrowingBottom: "rgba(201, 168, 106, 0)",
-    belowLineFillColorFallingBottom: "rgba(201, 168, 106, 0)",
-    gridLineColor: "rgba(240, 243, 250, 0)",
-    scaleFontColor: "rgba(167, 186, 202, 1)",
-    symbolActiveColor: "rgba(201, 168, 106, 0.16)"
-  };
-  function initWidgets(){
-    /* Stocks are the only TradingView widget left: metals and the news
-       feed are custom panels fed by their own APIs, and oil was removed. */
-    buildTV("tvStocks", MO, Object.assign({}, MO_DARK, {
-      tabs: [{ title: "Stocks & Indices", symbols: [
-        { s: "FOREXCOM:SPXUSD", d: "S&P 500" },
-        { s: "FOREXCOM:NSXUSD", d: "Nasdaq 100" },
-        { s: "FOREXCOM:DJI", d: "Dow Jones" },
-        { s: "NASDAQ:AAPL", d: "Apple" },
-        { s: "NASDAQ:MSFT", d: "Microsoft" },
-        { s: "NASDAQ:NVDA", d: "Nvidia" }
-      ] }]
-    }), 500);
+  function fmtChg(price, prev){
+    if (typeof price !== "number" || typeof prev !== "number" || !prev) return { text: "\u2014", up: null };
+    var d = price - prev, pct = d / prev * 100;
+    return { text: (d >= 0 ? "\u25b2 +" : "\u25bc ") + fmtStock(Math.abs(d)) + " (" + (d >= 0 ? "+" : "") + pct.toFixed(2) + "%)", up: d >= 0 };
+  }
+  function buildStockRows(){
+    var body = document.getElementById("stRows");
+    if (!body || stBuilt) return;
+    stBuilt = true;
+    STOCKS.forEach(function(s){
+      var tr = document.createElement("tr");
+      tr.setAttribute("data-key", s.key);
+      if (s.key === stSelected) tr.className = "on";
+      tr.innerHTML = '<td class="asset">' + s.label + ' <span>' + s.sub + '</span></td>' +
+        '<td class="num" id="sp-' + s.key + '">\u2014</td>' +
+        '<td class="r chg" id="sc-' + s.key + '">\u2014</td>';
+      tr.addEventListener("click", function(){ selectStock(s.key); });
+      body.appendChild(tr);
+    });
+    var ranges = document.getElementById("stRanges");
+    if (ranges) ranges.addEventListener("click", function(e){
+      var b = e.target.closest ? e.target.closest("button[data-range]") : null;
+      if (b) setRange(b.getAttribute("data-range"));
+    });
+  }
+  function initStocks(){
+    buildStockRows();
+    loadStocks();
+    loadFearGreed();
+    updateMarketBadge();
+    if (!stTimer) {
+      stTimer = setInterval(loadStocks, 60000);
+      setInterval(loadFearGreed, 1800000);
+      setInterval(updateMarketBadge, 60000);
+    }
+  }
+  function loadStocks(){
+    var note = document.getElementById("stocksErr");
+    getJSON(STOCKS_URL + "&t=" + Date.now())
+      .then(function(d){
+        if (!d || !Array.isArray(d.quotes)) return;
+        d.quotes.forEach(function(q){
+          stQuotes[q.symbol] = q;
+          var pc = document.getElementById("sp-" + q.symbol);
+          var cc = document.getElementById("sc-" + q.symbol);
+          if (pc && typeof q.price === "number") { pc.textContent = fmtStock(q.price); pulse(pc); }
+          if (cc) {
+            var c = fmtChg(q.price, q.prevClose);
+            cc.textContent = c.text;
+            cc.className = "r chg" + (c.up === null ? "" : (c.up ? " up" : " down"));
+            pulse(cc);
+          }
+        });
+        var sel = stQuotes[stSelected];
+        if (sel) {
+          updateChartHeader(sel);
+          if (stRange === "1D" && Array.isArray(sel.series) && lpPage && lpPage.classList.contains("on")) drawChart(sel.series, "1D");
+        }
+        var up = document.getElementById("stUpdated");
+        if (up) up.textContent = "Updated " + new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+        if (note) note.classList.remove("show");
+      })
+      .catch(function(){
+        if (note) note.classList.add("show");
+      });
+  }
+  function updateChartHeader(q){
+    var nm = document.getElementById("stChartName");
+    var pr = document.getElementById("stChartPrice");
+    var ch = document.getElementById("stChartChange");
+    var meta = null;
+    STOCKS.forEach(function(s){ if (s.key === q.symbol) meta = s; });
+    if (nm && meta) nm.textContent = meta.label;
+    if (pr && typeof q.price === "number") { pr.textContent = fmtStock(q.price); pulse(pr); }
+    if (ch) {
+      var c = fmtChg(q.price, q.prevClose);
+      ch.textContent = c.text;
+      ch.className = "chg" + (c.up === null ? "" : (c.up ? " up" : " down"));
+    }
+  }
+  function selectStock(key){
+    if (key === stSelected) return;
+    stSelected = key;
+    var rows = document.querySelectorAll("#stRows tr");
+    for (var i = 0; i < rows.length; i++) rows[i].classList.toggle("on", rows[i].getAttribute("data-key") === key);
+    var q = stQuotes[key];
+    if (q) updateChartHeader(q);
+    loadChart();
+  }
+  function setRange(range){
+    if (range === stRange) return;
+    stRange = range;
+    var btns = document.querySelectorAll("#stRanges button");
+    for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("on", btns[i].getAttribute("data-range") === range);
+    loadChart();
+  }
+  function loadChart(){
+    var q = stQuotes[stSelected];
+    if (stRange === "1D" && q && Array.isArray(q.series)) { drawChart(q.series, "1D"); return; }
+    var empty = document.getElementById("stChartEmpty");
+    if (empty) { empty.textContent = "Loading chart\u2026"; empty.style.display = "grid"; }
+    getJSON(STOCKS_URL + "&symbol=" + stSelected + "&range=" + stRange + "&t=" + Date.now())
+      .then(function(d){
+        if (d && Array.isArray(d.series) && d.series.length > 1) {
+          drawChart(d.series, stRange);
+          if (typeof d.price === "number") {
+            stQuotes[stSelected] = { symbol: stSelected, price: d.price, prevClose: d.prevClose, series: d.series };
+            updateChartHeader(stQuotes[stSelected]);
+          }
+        }
+      })
+      .catch(function(){ /* keep the previous chart */ });
+  }
+  function drawChart(series, range){
+    var line = document.getElementById("stLine");
+    var area = document.getElementById("stArea");
+    var grid = document.getElementById("stGrid");
+    var dot = document.getElementById("stEndDot");
+    var empty = document.getElementById("stChartEmpty");
+    if (!line || !area || !series || series.length < 2) return;
+    var W = 640, H = 220, P = 14;
+    var vals = series.map(function(p){ return p[1]; });
+    var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+    if (max === min) { max = min + 1; }
+    var pad = (max - min) * 0.08; min -= pad; max += pad;
+    function X(i){ return P + (W - 2 * P) * i / (series.length - 1); }
+    function Y(v){ return P + (H - 2 * P) * (1 - (v - min) / (max - min)); }
+    var pts = series.map(function(p, i){ return [X(i), Y(p[1])]; });
+    var d = "M" + pts.map(function(p){ return p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" L");
+    line.setAttribute("d", d);
+    area.setAttribute("d", d + " L" + (W - P).toFixed(1) + " " + (H - P) + " L" + P + " " + (H - P) + " Z");
+    if (grid) {
+      var gh = "";
+      for (var g = 1; g <= 3; g++) {
+        var gy = P + (H - 2 * P) * g / 4;
+        gh += '<line x1="' + P + '" y1="' + gy.toFixed(1) + '" x2="' + (W - P) + '" y2="' + gy.toFixed(1) + '" stroke="#FCFBFB" stroke-opacity=".07" stroke-width="1"/>';
+      }
+      grid.innerHTML = gh;
+    }
+    var last = pts[pts.length - 1];
+    if (dot) { dot.setAttribute("cx", last[0].toFixed(1)); dot.setAttribute("cy", last[1].toFixed(1)); dot.style.display = "block"; }
+    var labels = document.getElementById("stXLabels");
+    if (labels) {
+      var spans = labels.querySelectorAll("span");
+      if (spans.length === 3) {
+        spans[0].textContent = fmtAxisTime(series[0][0], range);
+        spans[1].textContent = fmtAxisTime(series[Math.floor(series.length / 2)][0], range);
+        spans[2].textContent = fmtAxisTime(series[series.length - 1][0], range);
+      }
+    }
+    if (empty) empty.style.display = "none";
+    var len = 0;
+    try { len = line.getTotalLength(); } catch (e) { len = 0; }
+    if (len > 0) {
+      line.style.transition = "none";
+      line.style.strokeDasharray = len;
+      line.style.strokeDashoffset = len;
+      area.style.transition = "none";
+      area.style.opacity = "0";
+      void line.getBoundingClientRect();
+      line.style.transition = "stroke-dashoffset 1s ease";
+      line.style.strokeDashoffset = "0";
+      area.style.transition = "opacity .8s ease .35s";
+      area.style.opacity = "1";
+    } else {
+      line.style.strokeDasharray = "none";
+      area.style.opacity = "1";
+    }
+  }
+  function fmtAxisTime(ts, range){
+    var dt = new Date(ts * 1000);
+    if (range === "1D") return dt.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+    if (range === "1M" || range === "3M") return dt.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+    return dt.toLocaleDateString("en-GB", { month: "short", year: "2-digit" });
+  }
+  /* ---------- NYSE market status: pure clock math, no API ---------- */
+  var NYSE_HOLIDAYS = ["2026-11-26","2026-12-25","2027-01-01","2027-01-18","2027-02-15","2027-03-26","2027-05-31","2027-06-18","2027-07-05","2027-09-06","2027-11-25","2027-12-24"];
+  function nyseParts(d){
+    var f = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", weekday: "short", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false });
+    var o = {};
+    f.formatToParts(d).forEach(function(p){ o[p.type] = p.value; });
+    o.hour = String(parseInt(o.hour, 10) % 24);
+    return o;
+  }
+  function etOffsetHours(y, mo, d){
+    var probe = new Date(Date.UTC(y, mo - 1, d, 12, 0, 0));
+    var p = nyseParts(probe);
+    var diff = 12 - parseInt(p.hour, 10);
+    if (diff < 0) diff += 24;
+    return diff;
+  }
+  function etDateToUTC(y, mo, d, h, mi){
+    var off = etOffsetHours(parseInt(y, 10), parseInt(mo, 10), parseInt(d, 10));
+    return Date.UTC(parseInt(y, 10), parseInt(mo, 10) - 1, parseInt(d, 10), h + off, mi, 0);
+  }
+  function nextOpenLabel(now){
+    var p = nyseParts(now);
+    var mins = parseInt(p.hour, 10) * 60 + parseInt(p.minute, 10);
+    var iso = p.year + "-" + p.month + "-" + p.day;
+    var weekend = (p.weekday === "Sat" || p.weekday === "Sun");
+    var holiday = NYSE_HOLIDAYS.indexOf(iso) !== -1;
+    var target = null;
+    if (!weekend && !holiday && mins < 570) {
+      target = etDateToUTC(p.year, p.month, p.day, 9, 30);
+    } else {
+      for (var i = 1; i <= 10; i++) {
+        var d = new Date(now.getTime() + i * 86400000);
+        var q = nyseParts(d);
+        var qiso = q.year + "-" + q.month + "-" + q.day;
+        if (q.weekday !== "Sat" && q.weekday !== "Sun" && NYSE_HOLIDAYS.indexOf(qiso) === -1) {
+          target = etDateToUTC(q.year, q.month, q.day, 9, 30);
+          break;
+        }
+      }
+    }
+    if (!target) return "";
+    var diffMs = target - now.getTime();
+    if (diffMs < 0) diffMs = 0;
+    var h = Math.floor(diffMs / 3600000), m = Math.round((diffMs % 3600000) / 60000);
+    if (m === 60) { h += 1; m = 0; }
+    return "opens in " + (h > 0 ? h + "h " : "") + m + "m";
+  }
+  function updateMarketBadge(){
+    var badge = document.getElementById("stMarketBadge");
+    if (!badge) return;
+    var now = new Date();
+    var p = nyseParts(now);
+    var mins = parseInt(p.hour, 10) * 60 + parseInt(p.minute, 10);
+    var iso = p.year + "-" + p.month + "-" + p.day;
+    var weekend = (p.weekday === "Sat" || p.weekday === "Sun");
+    var holiday = NYSE_HOLIDAYS.indexOf(iso) !== -1;
+    if (!weekend && !holiday && mins >= 570 && mins < 960) {
+      badge.className = "st-badge open";
+      badge.innerHTML = '<span class="dot"></span> NYSE \u00b7 Open';
+      return;
+    }
+    var label = nextOpenLabel(now);
+    badge.className = "st-badge";
+    badge.innerHTML = '<span class="dot"></span> NYSE \u00b7 Closed' + (label ? " \u2014 " + label : "");
+  }
+  /* ---------- Crypto Fear & Greed Index: alternative.me, CORS-open,
+       refreshed every 30 minutes (the index itself updates once a day).
+       Needle + arc sweep to the new value with an eased tween. ---------- */
+  var fgCurrent = null;
+  function fgColor(v){
+    if (v < 25) return "#EA3943";
+    if (v < 45) return "#F0766A";
+    if (v <= 55) return "#C9A86A";
+    if (v < 75) return "#7ECB7E";
+    return "#4ADE80";
+  }
+  function loadFearGreed(){
+    getJSON("https://api.alternative.me/fng/?limit=2")
+      .then(function(d){
+        var now = d && d.data && d.data[0];
+        var prev = d && d.data && d.data[1];
+        if (!now) return;
+        var v = parseInt(now.value, 10);
+        if (isNaN(v)) return;
+        animateGauge(v);
+        var val = document.getElementById("fgValue");
+        var lab = document.getElementById("fgLabel");
+        var yday = document.getElementById("fgYday");
+        if (val) { val.textContent = v; pulse(val); }
+        if (lab) {
+          lab.textContent = now.value_classification || "";
+          lab.style.color = fgColor(v);
+        }
+        if (yday && prev) yday.textContent = "Yesterday: " + prev.value + " \u00b7 " + (prev.value_classification || "");
+      })
+      .catch(function(){ /* keep the placeholder */ });
+  }
+  function animateGauge(v){
+    var arc = document.getElementById("fgArc");
+    var needle = document.getElementById("fgNeedle");
+    if (!arc || !needle) return;
+    var total = Math.PI * 60;
+    var from = (fgCurrent === null) ? 0 : fgCurrent;
+    var start = null;
+    arc.setAttribute("stroke", fgColor(v));
+    function step(ts){
+      if (!start) start = ts;
+      var t = Math.min((ts - start) / 1200, 1);
+      var e = 1 - Math.pow(1 - t, 3);
+      var cur = from + (v - from) * e;
+      arc.setAttribute("stroke-dasharray", (cur / 100 * total).toFixed(1) + " " + total.toFixed(1));
+      needle.setAttribute("transform", "rotate(" + (-90 + cur / 100 * 180).toFixed(1) + " 75 70)");
+      if (t < 1) requestAnimationFrame(step);
+      else fgCurrent = v;
+    }
+    requestAnimationFrame(step);
   }
   var lpPage = document.getElementById("page-live-pulse");
   function maybeInit(){
-    if (lpPage && lpPage.classList.contains("on")) initWidgets();
+    if (lpPage && lpPage.classList.contains("on")) {
+      initStocks();
+      if (syData) renderSyriaExtras(syData);
+    }
     maybeRefreshSyria();
   }
   function maybeRefreshSyria(){
