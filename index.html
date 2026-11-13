@@ -1275,6 +1275,11 @@
   .lp-alert{display:flex;gap:14px;align-items:flex-start;border:1.5px solid var(--gold);background:linear-gradient(155deg,rgba(201,168,106,.15),rgba(8,31,49,.5));border-radius:18px;padding:20px 24px;font-size:15.5px;line-height:1.75;color:#F3E9CF;box-shadow:0 22px 44px rgba(0,0,0,.3)}
   .lp-alert svg{width:22px;height:22px;flex:none;color:var(--gold-hot);margin-top:3px}
   .lp-alert b{color:#fff}
+  /* v38 maintenance notice (TEMPORARY — remove when the data service is back) */
+  .lp-maintenance{display:flex;gap:16px;align-items:flex-start;border:1.5px solid var(--gold);background:linear-gradient(155deg,rgba(201,168,106,.16),rgba(8,31,49,.55));border-radius:18px;padding:22px 26px;box-shadow:0 22px 44px rgba(0,0,0,.3);margin-bottom:26px}
+  .lp-maintenance b{display:block;font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-size:18px;color:#fff;margin-bottom:6px;letter-spacing:.01em}
+  .lp-maintenance p{font-size:15.5px;line-height:1.75;color:#F3E9CF;margin:0}
+  .lp-maint-dot{width:11px;height:11px;border-radius:50%;background:var(--gold-hot);flex:none;margin-top:7px;animation:pulseDot 2s ease-in-out infinite}
   .lp-analysis{background:linear-gradient(155deg,var(--navy-3),var(--navy) 70%);border:1.5px solid var(--gold);border-radius:22px;padding:36px 34px;box-shadow:0 30px 55px rgba(0,0,0,.4)}
   .lp-analysis .lp-date{display:inline-block;margin-bottom:18px;padding:6px 15px;border:1px solid rgba(201,168,106,.5);border-radius:999px;background:rgba(201,168,106,.09);font-size:12.5px;font-weight:700;color:var(--gold-hot);letter-spacing:.06em}
   .lp-analysis p{color:#DCE6EF;font-size:16.5px;line-height:1.95}
@@ -3040,6 +3045,14 @@
 
   <section class="blk" style="padding-top:8px">
     <div class="wrap">
+      <!-- MAINTENANCE NOTICE — added v38 (14 Nov 2026) while the Apps Script data service is down (Google account disabled). REMOVE this whole block when the account is restored. Nothing else was changed. -->
+      <div class="lp-maintenance rv">
+        <span class="lp-maint-dot" aria-hidden="true"></span>
+        <div>
+          <b>Live data is under maintenance</b>
+          <p>Our live-data service is being restored. The tables below will show the latest figures again shortly — thank you for your patience.</p>
+        </div>
+      </div>
       <div class="lp-clock rv">
         <div>
           <span class="lp-clock-label"><span class="live-dot"></span> Greenwich Mean Time (GMT)</span>
