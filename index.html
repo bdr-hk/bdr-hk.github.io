@@ -2727,10 +2727,11 @@
       <div class="newsletter-card rv">
         <h3>Never miss an Insight.</h3>
         <p>Get the newest article in your inbox the day it is published &mdash; no spam, one email per article.</p>
-        <form class="newsletter-form" id="newsletterForm" novalidate>
-          <input class="newsletter-input" id="newsletterEmail" type="email" placeholder="Your email address" aria-label="Email address" autocomplete="email">
+        <form class="newsletter-form" id="newsletterForm" action="https://buttondown.com/api/emails/embed-subscribe/badrhakim" method="post" target="newsletter-iframe" novalidate>
+          <input class="newsletter-input" id="newsletterEmail" type="email" name="email" placeholder="Your email address" aria-label="Email address" autocomplete="email">
           <button class="newsletter-btn" type="submit">Subscribe</button>
         </form>
+        <iframe name="newsletter-iframe" id="newsletterIframe" title="Newsletter signup" aria-hidden="true" tabindex="-1" style="display:none"></iframe>
         <p class="newsletter-msg" id="newsletterMsg" role="status" aria-live="polite"></p>
       </div>
     </div>
@@ -4668,13 +4669,31 @@
 /* Newsletter + Share + Reading progress (v30, English only) */
 (function(){
   "use strict";
-  /* ---------- Newsletter ---------- */
+  /* ---------- Newsletter (Buttondown + owner notification) ---------- */
   var form = document.getElementById("newsletterForm");
   if (form) {
     var input = document.getElementById("newsletterEmail");
     var msg = document.getElementById("newsletterMsg");
     var btn = form.querySelector(".newsletter-btn");
+    var frame = document.getElementById("newsletterIframe");
     var CHECK = '<svg class="check" width="20" height="20" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="none" stroke="#C9A86A" stroke-width="2.5"/><path fill="none" stroke="#F7E7BC" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" d="M14 27l8 8 16-16"/></svg>';
+    var pending = false;
+    var timer = null;
+    function resetBtn(){
+      btn.disabled = false;
+      btn.textContent = "Subscribe";
+    }
+    if (frame) {
+      frame.addEventListener("load", function(){
+        if (!pending) return;
+        pending = false;
+        if (timer) { clearTimeout(timer); timer = null; }
+        msg.innerHTML = CHECK + "Almost done \u2014 check your inbox and click the confirmation link to complete your subscription.";
+        msg.className = "newsletter-msg success";
+        input.value = "";
+        resetBtn();
+      });
+    }
     form.addEventListener("submit", function(e){
       e.preventDefault();
       var email = (input.value || "").trim();
@@ -4691,25 +4710,25 @@
       btn.textContent = "Subscribing\u2026";
       msg.textContent = "";
       msg.className = "newsletter-msg";
-      fetch("https://formsubmit.co/ajax/bdrhakim@outlook.com", {
-        method: "POST",
-        headers: {"Content-Type": "application/json", "Accept": "application/json"},
-        body: JSON.stringify({email: email, _subject: "New newsletter subscriber \u2014 Badr Hakim website", _captcha: "false", _template: "table"})
-      }).then(function(res){
-        if (!res.ok) throw new Error("bad status");
-        return res.json();
-      }).then(function(){
-        msg.innerHTML = CHECK + "You are subscribed \u2014 welcome aboard.";
-        msg.className = "newsletter-msg success";
-        input.value = "";
-        btn.disabled = false;
-        btn.textContent = "Subscribe";
-      }).catch(function(){
+      /* Notify the owner in parallel (fire-and-forget). */
+      try {
+        fetch("https://formsubmit.co/ajax/bdrhakim@outlook.com", {
+          method: "POST",
+          headers: {"Content-Type": "application/json", "Accept": "application/json"},
+          body: JSON.stringify({email: email, _subject: "New newsletter subscriber \u2014 Badr Hakim website", _captcha: "false", _template: "table"})
+        }).catch(function(){});
+      } catch (err) {}
+      /* Subscribe via Buttondown (posts into the hidden iframe). */
+      pending = true;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function(){
+        if (!pending) return;
+        pending = false;
         msg.textContent = "Something went wrong. Please try again.";
         msg.className = "newsletter-msg error";
-        btn.disabled = false;
-        btn.textContent = "Subscribe";
-      });
+        resetBtn();
+      }, 15000);
+      form.submit();
     });
     input.addEventListener("input", function(){
       input.classList.remove("shake");
