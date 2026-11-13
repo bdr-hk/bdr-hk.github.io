@@ -1292,23 +1292,29 @@
   .share-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(201,168,106,.25);padding-top:28px;margin-top:8px}
   .share-label{font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:.02em}
   .share-wrap{position:relative}
-  .share-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid rgba(201,168,106,.6);border-radius:999px;background:rgba(201,168,106,.08);color:var(--gold-hot);font-weight:700;font-size:14.5px;cursor:pointer;transition:background .25s,transform .25s}
+  .share-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:1px solid rgba(201,168,106,.6);border-radius:999px;background:rgba(201,168,106,.08);color:var(--gold-hot);font-weight:700;font-size:14.5px;cursor:pointer;transition:background .25s,transform .25s,border-color .25s,box-shadow .25s}
   .share-btn:hover{background:rgba(201,168,106,.18);transform:translateY(-2px)}
-  .share-menu{position:absolute;right:0;bottom:calc(100% + 12px);min-width:200px;background:#0B2A44;border:1px solid rgba(201,168,106,.5);border-radius:14px;padding:8px;box-shadow:0 24px 50px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(8px) scale(.97);transform-origin:bottom right;transition:opacity .25s,transform .25s,visibility .25s;z-index:50}
+  .share-btn svg{transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+  .share-btn.open{background:rgba(201,168,106,.22);border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,168,106,.14)}
+  .share-btn.open svg{transform:rotate(90deg)}
+  .share-menu{position:absolute;right:0;bottom:calc(100% + 14px);min-width:210px;background:rgba(11,42,68,.92);border:1px solid rgba(201,168,106,.5);border-radius:14px;padding:8px;box-shadow:0 24px 50px rgba(0,0,0,.55),0 0 0 1px rgba(201,168,106,.08);opacity:0;visibility:hidden;transform:translateY(14px) scale(.93);transform-origin:bottom right;transition:opacity .32s cubic-bezier(.34,1.56,.64,1),transform .32s cubic-bezier(.34,1.56,.64,1),visibility .32s;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .share-menu::after{content:"";position:absolute;right:28px;bottom:-7px;width:12px;height:12px;background:#0B2A44;border-right:1px solid rgba(201,168,106,.5);border-bottom:1px solid rgba(201,168,106,.5);transform:rotate(45deg)}
   .share-menu.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
-  .share-menu.open .share-item{animation:popIn .35s cubic-bezier(.22,.8,.3,1) both}
-  .share-menu.open .share-item:nth-child(2){animation-delay:.04s}
-  .share-menu.open .share-item:nth-child(3){animation-delay:.08s}
-  .share-menu.open .share-item:nth-child(4){animation-delay:.12s}
-  .share-menu.open .share-item:nth-child(5){animation-delay:.16s}
-  .share-menu.open .share-item:nth-child(6){animation-delay:.2s}
-  .share-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 12px;border:none;border-radius:9px;background:transparent;color:var(--paper);font-family:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:background .2s}
-  .share-item:hover{background:rgba(201,168,106,.14)}
-  .share-item svg{flex:none}
+  .share-menu.open .share-item{animation:shareItemIn .45s cubic-bezier(.22,.8,.3,1) both}
+  .share-menu.open .share-item:nth-child(2){animation-delay:.05s}
+  .share-menu.open .share-item:nth-child(3){animation-delay:.1s}
+  .share-menu.open .share-item:nth-child(4){animation-delay:.15s}
+  .share-menu.open .share-item:nth-child(5){animation-delay:.2s}
+  .share-menu.open .share-item:nth-child(6){animation-delay:.25s}
+  @keyframes shareItemIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .share-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 12px;border:none;border-radius:9px;background:transparent;color:var(--paper);font-family:inherit;font-size:14.5px;font-weight:600;cursor:pointer;transition:background .2s,transform .2s}
+  .share-item:hover{background:rgba(201,168,106,.14);transform:translateX(4px)}
+  .share-item svg{flex:none;transition:transform .2s}
+  .share-item:hover svg{transform:scale(1.18)}
   .share-item.copied{color:var(--gold-hot)}
   #readProgress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-hot));z-index:9999;display:none;box-shadow:0 0 12px rgba(201,168,106,.7)}
   body[data-page="article"] #readProgress{display:block}
-  @media(max-width:640px){.newsletter-card{padding:30px 20px}.share-menu{right:auto;left:0;transform-origin:bottom left}}
+  @media(max-width:640px){.newsletter-card{padding:30px 20px}.share-menu{right:auto;left:0;transform-origin:bottom left}.share-menu::after{right:auto;left:28px}}
 </style>
 <script>
 /* intro gate: play once per browser session; never for reduced-motion visitors */
@@ -4744,11 +4750,13 @@
     var copyOriginal = copyBtn ? copyBtn.innerHTML : "";
     function closeMenu(){
       shareMenu.classList.remove("open");
+      shareBtn.classList.remove("open");
       shareBtn.setAttribute("aria-expanded", "false");
     }
     shareBtn.addEventListener("click", function(e){
       e.stopPropagation();
       var open = shareMenu.classList.toggle("open");
+      shareBtn.classList.toggle("open", open);
       shareBtn.setAttribute("aria-expanded", open ? "true" : "false");
     });
     document.addEventListener("click", function(e){
@@ -4762,13 +4770,16 @@
       if (!item) return;
       var kind = item.getAttribute("data-share");
       var url = location.href;
-      var title = document.title;
+      var titleEl = document.querySelector(".article-title");
+      var title = titleEl ? titleEl.textContent.trim() : document.title;
+      var byline = "by Badr Hakim";
+      var fullText = title + "\n" + byline + "\n" + url;
       var shareUrl = null;
       if (kind === "linkedin") shareUrl = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(url);
-      else if (kind === "x") shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(title);
+      else if (kind === "x") shareUrl = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(title + "\n" + byline);
       else if (kind === "facebook") shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
-      else if (kind === "whatsapp") shareUrl = "https://wa.me/?text=" + encodeURIComponent(title + " \u2014 " + url);
-      else if (kind === "email") shareUrl = "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(url);
+      else if (kind === "whatsapp") shareUrl = "https://wa.me/?text=" + encodeURIComponent(fullText);
+      else if (kind === "email") shareUrl = "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(title + "\n" + byline + "\n\n" + url);
       if (shareUrl) {
         if (kind === "email") { location.href = shareUrl; }
         else { window.open(shareUrl, "_blank", "noopener,width=640,height=560"); }
@@ -4787,9 +4798,9 @@
           closeMenu();
         };
         if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(url).then(done).catch(function(){ fallbackCopy(url, done); });
+          navigator.clipboard.writeText(fullText).then(done).catch(function(){ fallbackCopy(fullText, done); });
         } else {
-          fallbackCopy(url, done);
+          fallbackCopy(fullText, done);
         }
       }
     });
