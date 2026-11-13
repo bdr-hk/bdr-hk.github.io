@@ -1279,15 +1279,25 @@
   .st-table tbody tr:hover{background:rgba(201,168,106,.07)}
   .st-table tbody tr.on{background:rgba(201,168,106,.12);box-shadow:inset 3px 0 0 var(--gold)}
   .st-table tbody tr.on td.asset{color:var(--gold-hot)}
-  /* fear & greed gauge */
-  .fg-wrap{margin-top:20px;padding-top:18px;border-top:1px solid var(--line-soft);display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-  .fg-gauge{position:relative;width:150px;flex:none}
-  .fg-gauge svg{display:block;width:100%;height:auto}
-  .fg-read{flex:1;min-width:140px}
-  .fg-value{font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-size:30px;font-weight:700;color:#fff;line-height:1}
+  /* fear & greed: horizontal sentiment spectrum (not a dial) */
+  .fg-wrap{margin-top:20px;padding-top:18px;border-top:1px solid var(--line-soft)}
+  .fg-read{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .fg-value{font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-size:30px;font-weight:700;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
   .fg-value small{font-size:14px;color:var(--muted-2);font-weight:600}
-  .fg-label{font-size:14.5px;font-weight:700;margin-top:6px}
-  .fg-yday{font-size:12.5px;color:var(--muted-2);margin-top:6px}
+  .fg-label{font-size:14.5px;font-weight:700}
+  .fg-yday{margin-left:auto;font-size:12.5px;color:var(--muted-2)}
+  .fg-bar-wrap{margin-top:16px}
+  .fg-bar{position:relative;height:14px}
+  .fg-track{position:absolute;inset:0;border-radius:999px;background:linear-gradient(90deg,#EA3943 0%,#EA3943 24%,#F0766A 25%,#F0766A 44%,#C9A86A 45%,#C9A86A 55%,#7ECB7E 56%,#7ECB7E 74%,#4ADE80 75%,#4ADE80 100%);box-shadow:inset 0 1px 3px rgba(0,0,0,.35)}
+  .fg-marker{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:#081F31;border:2px solid #F7E7BC;box-shadow:0 0 0 4px rgba(247,231,188,.15),0 0 16px rgba(247,231,188,.5);display:grid;place-items:center;transition:left 1.4s cubic-bezier(.34,1.2,.5,1)}
+  .fg-marker-dot{width:8px;height:8px;border-radius:50%;background:#F7E7BC}
+  .fg-marker::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(247,231,188,.45);animation:fgRing 2.4s ease-out infinite}
+  @keyframes fgRing{0%{transform:scale(.7);opacity:1}100%{transform:scale(1.45);opacity:0}}
+  .fg-zones{display:flex;justify-content:space-between;font-size:11px;color:var(--muted-2);margin-top:10px;font-weight:600;letter-spacing:.02em}
+  .fg-zones span{flex:1;text-align:center;transition:color .4s ease}
+  .fg-zones span:first-child{text-align:left}
+  .fg-zones span:last-child{text-align:right}
+  .fg-zones span.on{color:var(--gold-hot)}
   /* economic calendar */
   .ev-list{margin-top:8px}
   .ev-day{margin-top:18px}
@@ -1305,7 +1315,7 @@
   .hist-title span{color:var(--muted-2);font-weight:600;font-size:12px;margin-left:6px}
   .hist-chart svg{display:block;width:100%;height:110px;margin-top:10px}
   .hist-range{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted-2);margin-top:4px;font-variant-numeric:tabular-nums}
-  @media(max-width:640px){.hist-charts{grid-template-columns:1fr}.st-chart-wrap svg{height:180px}.fg-wrap{justify-content:center;text-align:center}}
+  @media(max-width:640px){.hist-charts{grid-template-columns:1fr}.st-chart-wrap svg{height:180px}}
 
   /* syria heading pin: fixed stage beside the title (never wraps onto its own
      line), gold ripple rings radiating from the pin's base point, and a very
@@ -3027,17 +3037,17 @@
             </tbody>
           </table>
           <div class="fg-wrap">
-            <div class="fg-gauge">
-              <svg viewBox="0 0 150 80" role="img" aria-label="Crypto Fear and Greed Index gauge">
-                <path d="M15 70 A60 60 0 0 1 135 70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="12" stroke-linecap="round"/>
-                <path id="fgArc" d="M15 70 A60 60 0 0 1 135 70" fill="none" stroke="#F0766A" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 200"/>
-                <g id="fgNeedle"><line x1="75" y1="70" x2="75" y2="22" stroke="#F7E7BC" stroke-width="2.5" stroke-linecap="round"/><circle cx="75" cy="70" r="5" fill="#F7E7BC"/></g>
-              </svg>
-            </div>
             <div class="fg-read">
               <div class="fg-value"><span id="fgValue">—</span> <small>/ 100</small></div>
               <div class="fg-label" id="fgLabel">Crypto Fear &amp; Greed</div>
               <div class="fg-yday" id="fgYday">Yesterday: —</div>
+            </div>
+            <div class="fg-bar-wrap">
+              <div class="fg-bar">
+                <div class="fg-track"></div>
+                <div class="fg-marker" id="fgMarker"><span class="fg-marker-dot"></span></div>
+              </div>
+              <div class="fg-zones"><span>Extreme Fear</span><span>Fear</span><span>Neutral</span><span>Greed</span><span>Extreme Greed</span></div>
             </div>
           </div>
           <p class="lp-err" id="cryptoErr">Data unavailable, retrying…</p>
@@ -3162,7 +3172,7 @@
         <div class="kicker">Syria — Daily Snapshot</div>
         <div class="syria-head">
           <span class="syria-pin" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><ellipse cx="32" cy="53" rx="9" ry="3" fill="rgba(201,168,106,.22)"/><ellipse class="syria-ring" cx="32" cy="53" rx="11" ry="4" fill="none" stroke="#C9A86A" stroke-width="1.6"/><ellipse class="syria-ring d1" cx="32" cy="53" rx="11" ry="4" fill="none" stroke="#F7E7BC" stroke-width="1.6"/><g class="syria-bob"><path d="M32 10 C24.8 10 19.5 15.6 19.5 23.5 C19.5 33 32 52 32 52 C32 52 44.5 33 44.5 23.5 C44.5 15.6 39.2 10 32 10 Z" fill="#C9A86A"/><circle cx="32" cy="23.5" r="5.5" fill="#081F31"/></g></svg></span>
-          <h2 class="sec-title">Syria: dollar <em>&amp; gold</em></h2>
+          <h2 class="sec-title">Syria: the economy <em>today</em></h2>
         </div>
         <p class="sec-sub">The rates that matter at home — the Central Bank's official bulletin, the parallel market in Damascus, and the goldsmiths' daily price.</p>
       </div>
@@ -4480,7 +4490,8 @@
   }
   /* ---------- Crypto Fear & Greed Index: alternative.me, CORS-open,
        refreshed every 30 minutes (the index itself updates once a day).
-       Needle + arc sweep to the new value with an eased tween. ---------- */
+       The marker slides along the spectrum bar and the number counts up
+       to the new value with an eased tween. ---------- */
   var fgCurrent = null;
   function fgColor(v){
     if (v < 25) return "#EA3943";
@@ -4497,11 +4508,9 @@
         if (!now) return;
         var v = parseInt(now.value, 10);
         if (isNaN(v)) return;
-        animateGauge(v);
-        var val = document.getElementById("fgValue");
+        animateFg(v);
         var lab = document.getElementById("fgLabel");
         var yday = document.getElementById("fgYday");
-        if (val) { val.textContent = v; pulse(val); }
         if (lab) {
           lab.textContent = now.value_classification || "";
           lab.style.color = fgColor(v);
@@ -4510,23 +4519,23 @@
       })
       .catch(function(){ /* keep the placeholder */ });
   }
-  function animateGauge(v){
-    var arc = document.getElementById("fgArc");
-    var needle = document.getElementById("fgNeedle");
-    if (!arc || !needle) return;
-    var total = Math.PI * 60;
+  function animateFg(v){
+    var marker = document.getElementById("fgMarker");
+    var val = document.getElementById("fgValue");
+    var zones = document.querySelectorAll(".fg-zones span");
     var from = (fgCurrent === null) ? 0 : fgCurrent;
     var start = null;
-    arc.setAttribute("stroke", fgColor(v));
+    if (marker) marker.style.left = Math.min(98, Math.max(2, v)) + "%";
+    var zi = v < 25 ? 0 : v < 45 ? 1 : v <= 55 ? 2 : v < 75 ? 3 : 4;
+    for (var i = 0; i < zones.length; i++) zones[i].classList.toggle("on", i === zi);
     function step(ts){
       if (!start) start = ts;
       var t = Math.min((ts - start) / 1200, 1);
       var e = 1 - Math.pow(1 - t, 3);
-      var cur = from + (v - from) * e;
-      arc.setAttribute("stroke-dasharray", (cur / 100 * total).toFixed(1) + " " + total.toFixed(1));
-      needle.setAttribute("transform", "rotate(" + (-90 + cur / 100 * 180).toFixed(1) + " 75 70)");
+      var cur = Math.round(from + (v - from) * e);
+      if (val) val.textContent = cur;
       if (t < 1) requestAnimationFrame(step);
-      else fgCurrent = v;
+      else { fgCurrent = v; if (val) val.textContent = v; }
     }
     requestAnimationFrame(step);
   }
