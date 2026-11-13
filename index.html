@@ -3063,18 +3063,18 @@
       <div class="rv" style="margin-top:22px">
         <div class="lp-alert">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-          <p><b>Syria figures are updated every morning</b> — a daily snapshot, not live prices. <b id="syriaUpdated">Last updated: 12 Nov 2026.</b></p>
+          <p><b>Syria figures are updated every morning</b> — a daily snapshot, not live prices. <b id="syriaUpdated">Last updated: 13 Nov 2026.</b></p>
         </div>
       </div>
       <div class="lp-panel rv" style="margin-top:22px">
-        <h3 id="syriaRatesTitle">Today's Rates — 12 Nov 2026</h3>
+        <h3 id="syriaRatesTitle">Today's Rates — 13 Nov 2026</h3>
         <table class="lp-table">
           <thead><tr><th>Item</th><th class="r">Buy</th><th class="r">Sell</th></tr></thead>
           <tbody>
             <tr><td class="asset">US Dollar — Central Bank <span id="syUsdBulletin">Bulletin 213 · new lira</span></td><td class="num" id="syUsdCentralBuy">121.50</td><td class="num" id="syUsdCentralSell">122.50</td></tr>
             <tr><td class="asset">US Dollar — Parallel Market <span>Damascus · new lira</span></td><td class="num" id="syUsdParallelBuy">146.75</td><td class="num" id="syUsdParallelSell">147.25</td></tr>
-            <tr><td class="asset">Gold 21k — Goldsmiths Association <span>per gram · new lira</span></td><td class="num" id="syGoldBuy">16,250</td><td class="num" id="syGoldSell">16,550</td></tr>
-            <tr><td class="asset">Gold 21k vs yesterday</td><td class="note-cell" colspan="2"><span class="chg down" id="syGoldChange">▼ down 150</span></td></tr>
+            <tr><td class="asset">Gold 21k — Goldsmiths Association <span>per gram · new lira</span></td><td class="num" id="syGoldBuy">15,995</td><td class="num" id="syGoldSell">16,215</td></tr>
+            <tr><td class="asset">Gold 21k vs yesterday</td><td class="note-cell" colspan="2"><span class="chg down" id="syGoldChange">▼ down 335</span></td></tr>
           </tbody>
         </table>
         <p class="lp-note-sm">Sources: Central Bank of Syria (Bulletin 213), parallel market, Syrian Goldsmiths Association via SANA</p>
@@ -3124,8 +3124,8 @@
         <h2 class="sec-title" style="margin-top:14px">Today's <em>read</em></h2>
       </div>
       <div class="lp-analysis rv" style="margin-top:30px">
-        <span class="lp-date" id="syriaAnalysisDate">12 Nov 2026</span>
-        <p id="syriaAnalysisText">Thursday's pulse: the Syrian pound slipped further in the parallel market, with the dollar reaching 147.00 lira (sell) in Damascus — about 20% above the Central Bank's official 122.50. The gap keeps widening even as the official rate holds steady, a sign of real pressure on the local currency. Gold followed the global ounce lower: 21-karat fell 150 lira to 16,550 per gram (sell). Globally, gold eased to around $3,965 an ounce. The message of the day: when the gap between the official rate and the street rate grows, holding cash in lira costs more every week — and gold stays the shelter Syrians reach for first.</p>
+        <span class="lp-date" id="syriaAnalysisDate">13 Nov 2026</span>
+        <p id="syriaAnalysisText">Friday's pulse: the Syrian pound was flat in the parallel market, with the dollar unchanged at 147.25 lira (sell) in Damascus — still about 20% above the Central Bank's official 122.50, as Bulletin 213 remains in force ahead of today's midday release. The day's real move was in gold: the 21-karat gram fell 335 lira to 16,215 per gram (sell), tracking a global slide in the ounce to around $3,875 from $3,965 yesterday. For savers, that means gold bought yesterday is worth less in lira today, while buyers pay less than they did a day ago. With the currency steady and gold cheaper, the pressure of the past days eased slightly — but the wide gap between the official and parallel dollar rates keeps the two-tier market firmly in place.</p>
       </div>
     </div>
   </section>
@@ -3918,12 +3918,15 @@
 
   /* ---------- Syria daily snapshot: figures are read from a small live
        data file (updated every morning) so the daily numbers never need
-       a site republish. The fetch is direct (the file is public and
-       CORS-open) with an hourly cache-buster. A failed fetch is retried
-       once after ~2 seconds; if that also fails, the static figures baked
-       into the page stay exactly as they are — the update fails silently
-       and no error is ever shown to visitors. ---------- */
-  var SYRIA_URL = "https://drive.usercontent.google.com/download?id=1gloEiJjXrFXTf_vkrYzPZalk8Ho88fG5&export=download";
+       a site republish. The file is served by the "Badr Site Live Data"
+       Apps Script web app (drive.usercontent.google.com returns 403 for
+       cross-site browser fetches, so it cannot be fetched directly).
+       Millisecond cache-buster; two retries (2s, 6s) for Apps Script
+       cold starts; re-fetched when the Live Pulse page is shown again
+       (if >15 min since the last attempt). If every attempt fails, the
+       static figures baked into the page stay — silently, as before. */
+  var SYRIA_URL = "https://script.google.com/macros/s/AKfycbxzhxbpMLnCnGP7dVYSBXV42sPa-iOuYxnZFpFr6VSdfKBqJKo8cHuO_fJpIqKPVCqT/exec?feed=syria";
+  var syLastFetch = 0; /* ms timestamp of the last Syria fetch attempt */
   function sySet(id, txt){
     var el = document.getElementById(id);
     if (el) el.textContent = txt;
@@ -3935,11 +3938,11 @@
     return Math.round(n).toLocaleString("en-US");
   }
   function loadSyria(){
-    attemptSyria(false);
+    attemptSyria(0);
   }
-  function attemptSyria(retried){
-    var hour = Math.floor(Date.now() / 3600000);
-    getJSON(SYRIA_URL + "&t=" + hour)
+  function attemptSyria(n){
+    syLastFetch = Date.now();
+    getJSON(SYRIA_URL + "&t=" + Date.now())
       .then(function(d){
         if (!d || typeof d !== "object") return;
         if (typeof d.last_updated === "string" && d.last_updated) {
@@ -3994,9 +3997,10 @@
         }
       })
       .catch(function(){
-        /* one retry after ~2s; if that also fails, the static snapshot
-           stays — silently, as before */
-        if (!retried) setTimeout(function(){ attemptSyria(true); }, 2000);
+        /* two retries (2s, then 6s — Apps Script cold starts can be slow);
+           if all fail, the static snapshot stays — silently, as before */
+        if (n === 0) setTimeout(function(){ attemptSyria(1); }, 2000);
+        else if (n === 1) setTimeout(function(){ attemptSyria(2); }, 6000);
       });
   }
   if (document.getElementById("syriaUpdated")) loadSyria();
@@ -4061,7 +4065,12 @@
   var lpPage = document.getElementById("page-live-pulse");
   function maybeInit(){
     if (lpPage && lpPage.classList.contains("on")) initWidgets();
+    maybeRefreshSyria();
   }
+  function maybeRefreshSyria(){
+    if (lpPage && lpPage.classList.contains("on") && Date.now() - syLastFetch > 15*60*1000) loadSyria();
+  }
+  setInterval(maybeRefreshSyria, 5*60*1000);
   if (lpPage) {
     if ("MutationObserver" in window) {
       new MutationObserver(maybeInit).observe(lpPage, { attributes: true, attributeFilter: ["class"] });
@@ -4074,14 +4083,16 @@
 <script>
 /* ================= INSIGHTS: articles read from a live data file =================
    The Insights grid and the article page are rendered from a small public
-   JSON file, so a new article never needs a site republish. The static
+   JSON file, so a new article never needs a site republish. The file is
+   served by the "Badr Site Live Data" Apps Script web app (the Drive
+   download link returns 403 for cross-site browser fetches). The static
    card and the static first article baked into the HTML stay as the
    initial content and the fallback: they remain visible until the fetch
    succeeds, and stay if it fails (silently — no error is shown). */
 (function(){
   "use strict";
 
-  var ARTICLES_URL = "https://drive.usercontent.google.com/download?id=1Tp7VxJj_KpNZJkfjtE3sZbC9Ykzz1X_q&export=download";
+  var ARTICLES_URL = "https://script.google.com/macros/s/AKfycbxzhxbpMLnCnGP7dVYSBXV42sPa-iOuYxnZFpFr6VSdfKBqJKo8cHuO_fJpIqKPVCqT/exec?feed=articles";
 
   /* The five category scenes — the exact SVG markup already used across
      this site: chart-growth (Economics), bank-building-coins (Banking),
@@ -4367,8 +4378,10 @@
   }
 
   function loadArticles(){
-    var hour = Math.floor(Date.now() / 3600000);
-    getJSON(ARTICLES_URL + "&t=" + hour)
+    attemptArticles(false);
+  }
+  function attemptArticles(retried){
+    getJSON(ARTICLES_URL + "&t=" + Date.now())
       .then(function(d){
         if (!d || !Array.isArray(d.articles)) return;
         articles = d.articles;
@@ -4378,7 +4391,10 @@
         dollarizeArticle();
         if (currentPage() === "search") renderSearchResults();
       })
-      .catch(function(){ /* silent: the static card and article stay as fallback */ });
+      .catch(function(){
+        /* one retry after 3s (Apps Script cold start); silent fallback stays */
+        if (!retried) setTimeout(function(){ attemptArticles(true); }, 3000);
+      });
   }
   loadArticles();
   dollarizeArticle();
