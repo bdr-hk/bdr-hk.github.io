@@ -958,7 +958,7 @@
   .creed p{font-family:'Space Grotesk','Inter',system-ui,sans-serif;font-size:clamp(21px,2.9vw,29px);font-weight:600;color:#fff;line-height:1.65;max-width:800px;margin:0 auto}
   .creed p em{font-style:normal;color:var(--gold-hot)}
 
-  /* ================= INSIGHTS + ARTICLE (v27) ================= */
+  /* ================= REFLECTIONS + ARTICLE (v27) ================= */
   /* new pages in the site's own system: same navy ground, gold accents,
      Space Grotesk headings and Inter body as every other page */
   .filter-chips{display:flex;flex-wrap:wrap;gap:10px}
@@ -966,8 +966,8 @@
   .filter-chip:hover{color:#fff;border-color:var(--line);transform:translateY(-2px)}
   .filter-chip.active{background:linear-gradient(120deg,var(--gold),#B08D4F);color:var(--navy);border-color:var(--gold)}
   .home-teaser{max-width:660px;margin:38px auto 0;text-align:left}
-  .insights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:36px}
-  @media(max-width:720px){.insights-grid{grid-template-columns:1fr}}
+  .reflections-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:36px}
+  @media(max-width:720px){.reflections-grid{grid-template-columns:1fr}}
   .article-card{display:flex;flex-direction:column;border:1px solid var(--line-soft);background:var(--glass);border-radius:22px;padding:22px 22px 26px;overflow:hidden;transition:transform .35s,border-color .35s,background .35s}
   .article-card:hover{transform:translateY(-6px);border-color:var(--line);background:rgba(255,255,255,.06)}
   .article-card .thumb{border-radius:14px;background:linear-gradient(165deg,rgba(16,52,83,.65),rgba(5,20,31,.55));border:1px solid rgba(201,168,106,.22);overflow:hidden}
@@ -978,8 +978,8 @@
   .article-read{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-hot)}
   .article-read svg{width:15px;height:15px;transition:transform .3s;color:var(--red-2)}
   .article-card:hover .article-read svg{transform:translateX(4px)}
-  .insights-empty{display:none;margin-top:36px;border:1px dashed rgba(201,168,106,.35);border-radius:18px;padding:34px 28px;text-align:center;color:var(--muted);font-size:15.5px}
-  .insights-empty.show{display:block}
+  .reflections-empty{display:none;margin-top:36px;border:1px dashed rgba(201,168,106,.35);border-radius:18px;padding:34px 28px;text-align:center;color:var(--muted);font-size:15.5px}
+  .reflections-empty.show{display:block}
   .article-wrap{max-width:760px;margin:0 auto}
   .back-link{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-hot);transition:color .25s}
   .back-link svg{width:16px;height:16px;transition:transform .3s}
@@ -1020,7 +1020,7 @@
   /* article numbered steps */
   .article-steps{list-style:none;margin-top:22px;display:grid;gap:12px}
   .article-steps li{background:var(--glass);border:1px solid var(--line-soft);border-radius:16px;padding:18px 20px;color:var(--muted);font-size:16px;line-height:1.8}
-  /* ============ INSIGHTS INTRO — home, directly above Explore the Site ============ */
+  /* ============ REFLECTIONS INTRO — home, directly above Explore the Site ============ */
   /* soft gold glow pulsing slowly behind the panel; the .rv reveal handles the scroll entrance (fade + gentle rise) */
   .ins-intro{overflow:hidden}
   .ins-intro::before{content:"";position:absolute;inset:0;background:radial-gradient(560px 280px at 50% 46%,rgba(201,168,106,.17),transparent 70%);opacity:.5;animation:insGlow 6s ease-in-out infinite;pointer-events:none}
@@ -1093,7 +1093,7 @@
       <a href="#/expertise" data-nav="expertise">Expertise</a>
       <a href="#/credentials" data-nav="credentials">Credentials</a>
       <a href="#/philosophy" data-nav="philosophy">Philosophy</a>
-      <a href="#/insights" data-nav="insights">Insights</a>
+      <a href="#/reflections" data-nav="reflections">Reflections</a>
       <a href="#/insighter" data-nav="insighter">Insighter+</a>
       <a class="cta" href="#/contact" data-nav="contact">Contact</a>
     </nav>
@@ -1445,11 +1445,11 @@
   <section class="blk tint ins-intro">
     <div class="wrap">
       <div class="rv" style="text-align:center;max-width:720px;margin:0 auto">
-        <h2 class="sec-title ins-title">Insights</h2>
+        <h2 class="sec-title ins-title">Reflections</h2>
         <span class="ins-rule" aria-hidden="true"></span>
-        <p class="sec-sub" style="margin-left:auto;margin-right:auto">Insights is where economics meets philosophy. Money is not just numbers — it is the record of human choices: what we value, what we trust, and what we build. Here I write about those choices — the thinking behind saving and investing, the discipline of management, the skill of serving people well — as practices to master, not theories to memorise. Honest, practical, and grounded in how the world really works.</p>
+        <p class="sec-sub" style="margin-left:auto;margin-right:auto">Reflections is where economics meets philosophy. Money is not just numbers — it is the record of human choices: what we value, what we trust, and what we build. Here I write about those choices — the thinking behind saving and investing, the discipline of management, the skill of serving people well — as practices to master, not theories to memorise. Honest, practical, and grounded in how the world really works.</p>
         <div style="margin-top:28px">
-          <a class="btn btn-gold" href="#/insights">Explore Insights →</a>
+          <a class="btn btn-gold" href="#/reflections">Explore Reflections →</a>
         </div>
         <div class="home-teaser" id="homeTeaser">
         <article class="article-card" data-category="economics">
@@ -2437,15 +2437,15 @@
   </section>
 </main>
 
-<!-- ============================ INSIGHTS ============================ -->
-<main class="page" id="page-insights">
+<!-- ============================ REFLECTIONS ============================ -->
+<main class="page" id="page-reflections">
   <div class="page-head">
     <div class="ghost" aria-hidden="true">06</div>
     <div class="wrap">
-      <div class="rule-label stag">Insights</div>
-      <h1 class="stag" style="transition-delay:.08s">Insights</h1>
+      <div class="rule-label stag">Page 06 — Reflections</div>
+      <h1 class="stag" style="transition-delay:.08s">Reflections</h1>
       <p class="intro stag" style="transition-delay:.16s">Ideas on money, banking, management and life — written from real experience.</p>
-      <div class="crumbs stag" style="transition-delay:.24s"><a href="#/home">Home</a> &nbsp;/&nbsp; <b>Insights</b></div>
+      <div class="crumbs stag" style="transition-delay:.24s"><a href="#/home">Home</a> &nbsp;/&nbsp; <b>Reflections</b></div>
     </div>
   </div>
 
@@ -2461,7 +2461,7 @@
           <button type="button" class="filter-chip" data-filter="philosophy">Philosophy</button>
         </div>
       </div>
-      <div class="insights-grid rv" id="insightsGrid">
+      <div class="reflections-grid rv" id="reflectionsGrid">
         <article class="article-card" data-category="economics">
           <a class="thumb" href="#/article/money-losing-value" aria-label="Read: Your Money Is Quietly Losing Value">
             <svg class="scene" viewBox="0 0 640 220" role="img" aria-label="Animated bar chart with a rising gold line showing growth">
@@ -2484,7 +2484,7 @@
           <a class="article-read" href="#/article/money-losing-value">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
         </article>
       </div>
-      <p class="insights-empty" id="insightsEmpty">No articles in this category yet.</p>
+      <p class="reflections-empty" id="reflectionsEmpty">No articles in this category yet.</p>
     </div>
   </section>
 </main>
@@ -2494,7 +2494,7 @@
   <div class="page-head" style="padding-bottom:0">
     <div class="wrap">
       <div class="article-wrap">
-        <a class="back-link stag" href="#/insights"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg> Back to Insights</a>
+        <a class="back-link stag" href="#/reflections"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg> Back to Reflections</a>
         <div class="article-head-cat stag" style="transition-delay:.08s">Economics</div>
         <h1 class="article-title stag" style="transition-delay:.14s">Your Money Is Quietly Losing Value</h1>
         <div class="article-head-meta stag" style="transition-delay:.2s">12 November 2026 · 6 min read</div>
@@ -2860,7 +2860,7 @@
       <a href="#/expertise" data-nav="expertise">Expertise</a>
       <a href="#/credentials" data-nav="credentials">Credentials</a>
       <a href="#/philosophy" data-nav="philosophy">Philosophy</a>
-      <a href="#/insights" data-nav="insights">Insights</a>
+      <a href="#/reflections" data-nav="reflections">Reflections</a>
       <a href="#/insighter" data-nav="insighter">Insighter+</a>
       <a href="#/contact" data-nav="contact">Contact</a>
     </nav>
@@ -2910,12 +2910,13 @@
   } else if (intro && intro.parentNode) {
     intro.parentNode.removeChild(intro);
   }
-  var PAGES = ["home","about","experience","expertise","credentials","philosophy","insights","insighter","article","contact"];
+  var PAGES = ["home","about","experience","expertise","credentials","philosophy","reflections","insighter","article","contact"];
 
   /* ---------- router with curtain transition ---------- */
   function currentPage(){
     var h = (location.hash || "").replace(/^#\/?/, "").split("?")[0];
     if (h.indexOf("article/") === 0) return "article";
+    if (h === "insights") return "reflections"; /* legacy alias (v40): the page was renamed from Insights to Reflections; old #/insights links keep working */
     return PAGES.indexOf(h) >= 0 ? h : "home";
   }
   var counted = {};
@@ -2928,7 +2929,13 @@
       if (el) el.classList.toggle("on", p === name);
     });
     document.body.setAttribute("data-page", name);
-    var navName = name === "article" ? "insights" : name;
+    /* legacy #/insights alias: once the Reflections page is showing, quietly
+       swap the address bar to the canonical #/reflections (replaceState
+       fires no hashchange, so this cannot loop) */
+    if (name === "reflections" && (location.hash === "#/insights" || location.hash === "#insights")) {
+      try { history.replaceState(null, "", "#/reflections"); } catch (e) {}
+    }
+    var navName = name === "article" ? "reflections" : name;
     document.querySelectorAll("[data-nav]").forEach(function(a){
       a.classList.toggle("active", a.getAttribute("data-nav") === navName);
     });
@@ -2950,7 +2957,7 @@
   }
 
   var curtainName = document.getElementById("curtainName");
-  var LABELS = { home:"Home", about:"About", experience:"Experience", expertise:"Expertise", credentials:"Credentials", philosophy:"Philosophy", insights:"Insights", insighter:"Insighter+", article:"Insights", contact:"Contact" };
+  var LABELS = { home:"Home", about:"About", experience:"Experience", expertise:"Expertise", credentials:"Credentials", philosophy:"Philosophy", reflections:"Reflections", insighter:"Insighter+", article:"Reflections", contact:"Contact" };
   var navBusy = false;
   var navQueued = null;
 
@@ -2989,21 +2996,21 @@
     });
   });
 
-  /* ---------- insights: category filter chips ---------- */
+  /* ---------- reflections: category filter chips ---------- */
   var filterChips = document.querySelectorAll(".filter-chip");
-  var insightsEmpty = document.getElementById("insightsEmpty");
+  var reflectionsEmpty = document.getElementById("reflectionsEmpty");
   filterChips.forEach(function(chip){
     chip.addEventListener("click", function(){
       filterChips.forEach(function(c){ c.classList.remove("active"); });
       chip.classList.add("active");
       var f = chip.getAttribute("data-filter");
       var shown = 0;
-      document.querySelectorAll("#insightsGrid .article-card").forEach(function(card){
+      document.querySelectorAll("#reflectionsGrid .article-card").forEach(function(card){
         var match = f === "all" || card.getAttribute("data-category") === f;
         card.style.display = match ? "" : "none";
         if (match) shown++;
       });
-      if (insightsEmpty) insightsEmpty.classList.toggle("show", shown === 0);
+      if (reflectionsEmpty) reflectionsEmpty.classList.toggle("show", shown === 0);
     });
   });
 
@@ -3229,8 +3236,8 @@
 })();
 </script>
 <script>
-/* ================= INSIGHTS: articles read from a live data file =================
-   The Insights grid and the article page are rendered from a small public
+/* ================= REFLECTIONS: articles read from a live data file =================
+   The Reflections grid and the article page are rendered from a small public
    JSON file, so a new article never needs a site republish. The static
    card and the static first article baked into the HTML stay as the
    initial content and the fallback: they remain visible until the fetch
@@ -3354,19 +3361,19 @@
     var active = document.querySelector(".filter-chip.active");
     var f = active ? active.getAttribute("data-filter") : "all";
     var shown = 0;
-    document.querySelectorAll("#insightsGrid .article-card").forEach(function(card){
+    document.querySelectorAll("#reflectionsGrid .article-card").forEach(function(card){
       var match = f === "all" || card.getAttribute("data-category") === f;
       card.style.display = match ? "" : "none";
       if (match) shown++;
     });
-    var empty = document.getElementById("insightsEmpty");
+    var empty = document.getElementById("reflectionsEmpty");
     if (empty) empty.classList.toggle("show", shown === 0);
   }
 
   /* Cards are built with the same structure and classes as the static
      card; all text goes in via textContent, never as HTML. */
   function renderGrid(list){
-    var grid = document.getElementById("insightsGrid");
+    var grid = document.getElementById("reflectionsGrid");
     if (!grid) return;
     grid.innerHTML = "";
     list.forEach(function(a){
@@ -3445,12 +3452,12 @@
       if (catEl) catEl.textContent = "";
       if (titleEl) titleEl.textContent = "Article not found.";
       if (metaEl) metaEl.textContent = "";
-      if (bodyEl) bodyEl.innerHTML = '<p>This article could not be found. <a href="#/insights">Back to Insights</a></p>';
+      if (bodyEl) bodyEl.innerHTML = '<p>This article could not be found. <a href="#/reflections">Back to Reflections</a></p>';
     }
   }
 
-  /* Home Insights teaser: the newest article (the data file is ordered
-     newest first), rendered as the same card the Insights grid uses.
+  /* Home Reflections teaser: the newest article (the data file is ordered
+     newest first), rendered as the same card the Reflections grid uses.
      On fetch failure the static fallback card in the HTML stays. */
   function renderHomeTeaser(list){
     var box = document.getElementById("homeTeaser");
